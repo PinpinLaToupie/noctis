@@ -1,0 +1,191 @@
+/* ─── Tokens ─────────────────────────────────────────── */
+:root {
+  --bg: #07000f;
+  --bg-2: #0d0020;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.07);
+  --border: rgba(75, 45, 142, 0.3);
+  --border-hover: rgba(123, 93, 204, 0.55);
+  --primary: #4b2d8e;
+  --accent: #7b5dcc;
+  --highlight: #a78bfa;
+  --text: #f0eaff;
+  --text-muted: #7a7090;
+  --radius-card: 16px;
+  --radius-btn: 12px;
+  --shadow-glow: 0 0 40px rgba(75, 45, 142, 0.25);
+  --shadow-btn: 0 0 24px rgba(123, 93, 204, 0.45);
+  --font: "Inter", system-ui, sans-serif;
+}
+
+/* ─── Reset ──────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ─── Noise grain overlay ────────────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 150px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ─── Scroll animation ───────────────────────────────── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* stagger delays */
+.fade-up:nth-child(1) {
+  transition-delay: 0s;
+}
+.fade-up:nth-child(2) {
+  transition-delay: 0.08s;
+}
+.fade-up:nth-child(3) {
+  transition-delay: 0.16s;
+}
+.fade-up:nth-child(4) {
+  transition-delay: 0.24s;
+}
+.fade-up:nth-child(5) {
+  transition-delay: 0.32s;
+}
+.fade-up:nth-child(6) {
+  transition-delay: 0.4s;
+}
+
+/* ─── Shared layout helpers ──────────────────────────── */
+.section {
+  position: relative;
+  z-index: 1;
+  padding: 96px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--highlight);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 560px;
+}
+
+/* ─── Download button ────────────────────────────────── */
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 32px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: var(--radius-btn);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 36px rgba(123, 93, 204, 0.65);
+  filter: brightness(1.08);
+}
+
+.btn-download:active {
+  transform: translateY(0);
+}
+
+/* ─── Glass card ─────────────────────────────────────── */
+.glass-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+  transform: translateY(-3px);
+}
+
+/* ─── Divider ─────────────────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0 auto;
+}
